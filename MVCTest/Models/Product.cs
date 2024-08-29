@@ -20,9 +20,10 @@ namespace MVCTest.Models
         [Required]
         public decimal Price { get; set; }
 
-        [DataType(DataType.Date)]
+        [Required]
         public DateTime Date { get; set; }
         public string? ImagePath { get; set; }
+
         [NotMapped]
         public IFormFile? Image { get; set; }
     }

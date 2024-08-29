@@ -4,7 +4,7 @@
     ViewData["Title"] = "AddProducts";
 }
 
-<h1>AddProducts</h1>
+
 
 <h4>Product</h4>
 <hr />
@@ -17,38 +17,37 @@
                 <div class="product-field row">
                     <div class="form-group col-md-2">
                         <label asp-for="Title" class="control-label"></label>
-                        <input name="[0].Title" class="form-control" />
-                        <span asp-validation-for="Title" class="text-danger"></span>
+                        <input name="[0].Title" class="form-control" data-val="true" data-val-required="The Title field is required." />
+                        <span asp-validation-for="Title" class="text-danger" data-valmsg-for="[0].Title"></span>
                     </div>
                     <div class="form-group col-md-2">
                         <label asp-for="Description" class="control-label"></label>
-                        <input name="[0].Description" class="form-control" />
-                        <span asp-validation-for="Description" class="text-danger"></span>
+                        <input name="[0].Description" class="form-control" data-val="true" data-val-required="The Description field is required." data-val-length="Description should not be greater than 250 words." data-val-length-max="250" />
+                        <span asp-validation-for="Description" class="text-danger" data-valmsg-for="[0].Description"></span>
                     </div>
                     <div class="form-group col-md-1">
                         <label asp-for="Quantity" class="control-label"></label>
-                        <input name="[0].Quantity" class="form-control" />
-                        <span asp-validation-for="Quantity" class="text-danger"></span>
+                        <input name="[0].Quantity" class="form-control" data-val="true" data-val-required="The Quantity field is required." />
+                        <span asp-validation-for="Quantity" class="text-danger" data-valmsg-for="[0].Quantity"></span>
                     </div>
                     <div class="form-group col-md-2">
                         <label asp-for="Price" class="control-label"></label>
-                        <input name="[0].Price" class="form-control" />
-                        <span asp-validation-for="Price" class="text-danger"></span>
+                        <input name="[0].Price" class="form-control" data-val="true" data-val-required="The Price field is required." />
+                        <span asp-validation-for="Price" class="text-danger" data-valmsg-for="[0].Price"></span>
                     </div>
                     <div class="form-group col-md-2">
                         <label asp-for="Date" class="control-label"></label>
                         <input name="[0].Date" type="date" class="form-control" />
-                        <span asp-validation-for="Date" class="text-danger"></span>
+                        <span asp-validation-for="Date" class="text-danger" data-valmsg-for="[0].Date"></span>
                     </div>
                     <div class="form-group col-md-2">
                         <label asp-for="Image" class="control-label"></label>
                         <input name="[0].Image" type="file" class="form-control" />
-                        <span asp-validation-for="Image" class="text-danger"></span>
+                        <span asp-validation-for="Image" class="text-danger" data-valmsg-for="[0].Image"></span>
                     </div>
                 </div>
-            <button type="button" id="add-field" class="btn btn-primary mb-3">Add Product</button>
+                <button type="button" id="add-field" class="btn btn-primary mb-3">Add Product</button>
             </div>
-
 
             <div class="form-group mt-3">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -67,40 +66,40 @@
     }
     <script>
         $(document).ready(function () {
-            var fieldIndex = 1; 
+            var fieldIndex = 1;
 
             $('#add-field').click(function () {
                 var newFieldHtml = `
-                            <div class="product-field row">
-                                <div class="form-group col-md-2">
-                                    <label for="Title" class="control-label">Title</label>
-                                    <input name="[${fieldIndex}].Title" class="form-control" />
-                                    <span class="text-danger"></span>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="Description" class="control-label">Description</label>
-                                    <input name="[${fieldIndex}].Description" class="form-control" />
-                                    <span class="text-danger"></span>
-                                </div>
-                                <div class="form-group col-md-1">
-                                    <label for="Quantity" class="control-label">Quantity</label>
-                                    <input name="[${fieldIndex}].Quantity" class="form-control" />
-                                    <span class="text-danger"></span>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="Price" class="control-label">Price</label>
-                                    <input name="[${fieldIndex}].Price" class="form-control" />
-                                    <span class="text-danger"></span>
-                                </div>
-                                     <div class="form-group col-md-2">
+                                    <div class="product-field row">
+                                        <div class="form-group col-md-2">
+                                            <label for="Title" class="control-label">Title</label>
+                                            <input name="[${fieldIndex}].Title" class="form-control" data-val="true" data-val-required="The Title field is required." />
+                                            <span class="text-danger" data-valmsg-for="[${fieldIndex}].Title"></span>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="Description" class="control-label">Description</label>
+                                            <input name="[${fieldIndex}].Description" class="form-control" data-val="true" data-val-required="The Description field is required." data-val-length="Description should not be greater than 250 words." data-val-length-max="250" />
+                                            <span class="text-danger" data-valmsg-for="[${fieldIndex}].Description"></span>
+                                        </div>
+                                        <div class="form-group col-md-1">
+                                            <label for="Quantity" class="control-label">Quantity</label>
+                                            <input name="[${fieldIndex}].Quantity" class="form-control" data-val="true" data-val-required="The Quantity field is required." />
+                                            <span class="text-danger" data-valmsg-for="[${fieldIndex}].Quantity"></span>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="Price" class="control-label">Price</label>
+                                            <input name="[${fieldIndex}].Price" class="form-control" data-val="true" data-val-required="The Price field is required." />
+                                            <span class="text-danger" data-valmsg-for="[${fieldIndex}].Price"></span>
+                                        </div>
+                                        <div class="form-group col-md-2">
                                             <label for="Date" class="control-label">Date</label>
-                                            <input name="Products[${fieldIndex}].Date" type="date" class="form-control" />
-                                            <span class="text-danger"></span>
+                                            <input name="[${fieldIndex}].Date" type="date" class="form-control" />
+                                            <span class="text-danger" data-valmsg-for="[${fieldIndex}].Date"></span>
                                         </div>
                                         <div class="form-group col-md-2">
                                             <label for="Image" class="control-label">Image</label>
-                                            <input name="Products[${fieldIndex}].Image" type="file" class="form-control" />
-                                            <span class="text-danger"></span>
+                                            <input name="[${fieldIndex}].Image" type="file" class="form-control" />
+                                            <span class="text-danger" data-valmsg-for="[${fieldIndex}].Image"></span>
                                         </div>
                                         <div class="col-md-2 d-flex align-items-end">
                                             <button type="button" class="remove-field btn btn-danger">Remove</button>
@@ -109,6 +108,8 @@
                                 `;
                 $('#product-fields-container').append(newFieldHtml);
                 fieldIndex++;
+                // Re-parse the form to enable validation for the new fields
+                $.validator.unobtrusive.parse($('#product-fields-container'));
             });
 
             $(document).on('click', '.remove-field', function () {
