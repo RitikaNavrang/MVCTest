@@ -1,0 +1,119 @@
+﻿@model MVCTest.Models.Product
+
+@{
+    ViewData["Title"] = "AddProducts";
+}
+
+<h1>AddProducts</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddProducts" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div id="product-fields-container">
+                <div class="product-field row">
+                    <div class="form-group col-md-2">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input name="[0].Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input name="[0].Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label asp-for="Quantity" class="control-label"></label>
+                        <input name="[0].Quantity" class="form-control" />
+                        <span asp-validation-for="Quantity" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label asp-for="Price" class="control-label"></label>
+                        <input name="[0].Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label asp-for="Date" class="control-label"></label>
+                        <input name="[0].Date" type="date" class="form-control" />
+                        <span asp-validation-for="Date" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label asp-for="Image" class="control-label"></label>
+                        <input name="[0].Image" type="file" class="form-control" />
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+                </div>
+            <button type="button" id="add-field" class="btn btn-primary mb-3">Add Product</button>
+            </div>
+
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="GetProducts">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            var fieldIndex = 1; 
+
+            $('#add-field').click(function () {
+                var newFieldHtml = `
+                            <div class="product-field row">
+                                <div class="form-group col-md-2">
+                                    <label for="Title" class="control-label">Title</label>
+                                    <input name="[${fieldIndex}].Title" class="form-control" />
+                                    <span class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="Description" class="control-label">Description</label>
+                                    <input name="[${fieldIndex}].Description" class="form-control" />
+                                    <span class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-1">
+                                    <label for="Quantity" class="control-label">Quantity</label>
+                                    <input name="[${fieldIndex}].Quantity" class="form-control" />
+                                    <span class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="Price" class="control-label">Price</label>
+                                    <input name="[${fieldIndex}].Price" class="form-control" />
+                                    <span class="text-danger"></span>
+                                </div>
+                                     <div class="form-group col-md-2">
+                                            <label for="Date" class="control-label">Date</label>
+                                            <input name="Products[${fieldIndex}].Date" type="date" class="form-control" />
+                                            <span class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="Image" class="control-label">Image</label>
+                                            <input name="Products[${fieldIndex}].Image" type="file" class="form-control" />
+                                            <span class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-2 d-flex align-items-end">
+                                            <button type="button" class="remove-field btn btn-danger">Remove</button>
+                                        </div>
+                                    </div>
+                                `;
+                $('#product-fields-container').append(newFieldHtml);
+                fieldIndex++;
+            });
+
+            $(document).on('click', '.remove-field', function () {
+                $(this).closest('.product-field').remove();
+            });
+        });
+    </script>
+}

@@ -1,0 +1,96 @@
+﻿@using X.PagedList
+@model IPagedList<MVCTest.Models.Product>
+
+@{
+    ViewData["Title"] = "GetProducts";
+}
+
+<h1>GetProducts</h1>
+
+<p>
+    <a asp-action="AddProducts">Create New</a>
+</p>
+
+<form asp-action="GetProducts" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by Title: <input type="text" name="titleSearch" value="@ViewData["TitleFilter"]" />
+            Find by Date: <input type="date" name="dateSearch" value="@ViewData["DateFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="GetProducts">Back to Full List</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Image)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.ImagePath))
+                    {
+                        <img src="@Url.Content(item.ImagePath)" alt="Image" width="100" height="100" />
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="GetProducts"
+   asp-route-titleSearch="@ViewData["TitleFilter"]"
+   asp-route-dateSearch="@ViewData["DateFilter"]"
+   asp-route-pageNumber="@(Model.PageNumber - 1)"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="GetProducts"
+   asp-route-titleSearch="@ViewData["TitleFilter"]"
+   asp-route-dateSearch="@ViewData["DateFilter"]"
+   asp-route-pageNumber="@(Model.PageNumber + 1)"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>
