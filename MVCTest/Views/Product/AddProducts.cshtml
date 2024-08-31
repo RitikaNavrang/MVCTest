@@ -108,7 +108,6 @@
                                 `;
                 $('#product-fields-container').append(newFieldHtml);
                 fieldIndex++;
-                // Re-parse the form to enable validation for the new fields
                 $.validator.unobtrusive.parse($('#product-fields-container'));
             });
 
